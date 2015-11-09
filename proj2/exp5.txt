@@ -1,0 +1,57 @@
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  Exp 2  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+### commands
+
+ifconfig interface ipToAssign/numberBitsMask
+route add -net targetNetwork/numberBitsMask gw gateWayIp
+route add default gw gateWayIp
+route -n
+arp -a
+
+
+ip route prefix mask {ip-address | interface-type interface-number [ip-address]}
+ip route network/mask gateway
+
+interface type slot/port
+ip address ipaddress subnetmas
+
+
+y -> bancada
+x -> vlan number
+
+
+Enabling echo-reply to broadcast request
+echo 0 > /proc/sys/net/ipv4/icmp_echo_ignore_broadcasts
+
+
+Enabling forwarding in tuxes
+echo 1 > /proc/sys/net/ipv4/ip_forward
+
+
+------ adicionar vlan
+configure terminal
+vlan yx
+end
+show vlan id yx
+
+
+------ adicionar porta a vlan
+configure terminal
+interface fastethernet 0/port
+switchport mode access
+switchport access vlan vlanNumber
+end
+
+show running-config interface fastethernet 0/portNumber
+show interfaces fastethernet 0/portNumber switchport
+
+
+
+================================== tux 1, 2 e 4
+>>xterm
+add to /etc/resolv.conf
+
+search netlab.fe.up.pt
+nameserver 172.16.1.2
+
+

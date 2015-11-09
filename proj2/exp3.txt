@@ -1,0 +1,104 @@
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  Exp 2  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+### commands
+
+ifconfig interface ipToAssign/numberBitsMask
+route add -net targetNetwork/numberBitsMask gw gateWayIp
+route add default gw gateWayIp
+route -n
+arp -a
+
+y -> bancada
+x -> vlan number
+
+
+Enabling echo-reply to broadcast request
+echo 0 > /proc/sys/net/ipv4/icmp_echo_ignore_broadcasts
+
+
+Enabling forwarding in tuxes
+echo 1 > /proc/sys/net/ipv4/ip_forward
+
+
+------ adicionar vlan
+configure terminal
+vlan yx
+end
+show vlan id yx
+
+
+------ adicionar porta a vlan
+configure terminal
+interface fastethernet 0/port
+switchport mode access
+switchport access vlan vlanNumber
+end
+
+show running-config interface fastethernet 0/portNumber
+show interfaces fastethernet 0/portNumber switchport
+
+
+
+================================== tux 1
+ip:		172.16.10.1
+mac:	00:e0:7d:b4:b8:94
+
+>>xterm
+route add -net 172.16.11.0/24 gw 172.16.10.254
+
+arp -d 172.16.10.254
+
+
+
+
+
+================================== tux 2
+ip:		172.16.11.1
+mac:	00:12:3f:4e:17:a8
+
+>>xterm
+route add -net 172.16.10.0/24 gw 172.16.10.253
+
+arp -d 172.16.11.253
+
+
+
+
+================================== tux 3
+ip:		172.16.1.13
+mac:	00:12:3f:45:df:52
+
+
+>>GtkTerm
+
+enable
+8nortel
+
+
+**********  configurar as portas
+configure terminal
+interface fastethernet 0/5
+switchport mode access
+switchport access vlan 11
+end
+
+
+================================== tux 4
+ip eth0:	172.16.10.254
+mac eth0:	00:22:64:a6:a4:f8
+
+ip eth1:	172.16.11.253
+mac eth1:	00:c0:df:04:20:99
+
+
+>>xterm
+
+ifconfig eth1 down
+ifcondif eth1 up
+ifconfig eth1 172.16.y1.253/24
+
+echo 1 > /proc/sys/net/ipv4/ip_forward
+
+
+arp -d 172.16.10.1
+arp -d 172.16.11.1

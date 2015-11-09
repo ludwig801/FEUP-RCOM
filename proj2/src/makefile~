@@ -1,0 +1,7 @@
+ all:
+	clear
+	gcc -o proj nao.c
+
+ clean:
+
+	rm -f proj

@@ -1,0 +1,81 @@
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  Exp 2  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+### commands
+
+ifconfig interface ipToAssign/numberBitsMask
+route add -net targetNetwork/numberBitsMask gw gateWayIp
+route add default gw gateWayIp
+route -n
+arp -a
+
+y -> bancada
+x -> vlan number
+
+
+Enabling echo-reply to broadcast request
+echo 0 > /proc/sys/net/ipv4/icmp_echo_ignore_broadcasts
+
+
+------ adicionar vlan
+configure terminal
+vlan yx
+end
+show vlan id yx
+
+
+------ adicionar porta a vlan
+configure terminal
+interface fastethernet 0/port
+switchport mode access
+switchport access vlan vlanNumber
+end
+
+show running-config interface fastethernet 0/portNumber
+show interfaces fastethernet 0/portNumber switchport
+
+
+
+================================== tux 2
+ip:		172.16.11.1
+mac:	00:12:3f:4e:17:a8
+
+>>xterm
+updateimage
+/etc/init.d/networking restart
+ifconfig eth0 down
+ifconfig eth0 up
+
+ifconfig eth0 172.16.y1.1/24
+
+
+
+================================== tux 3
+>>GtkTerm
+
+enable
+8nortel
+
+*********  adicionar as vlans
+configure terminal
+vlan 10
+vlan 11
+end
+show vlan brief
+
+
+**********  configurar as portas
+configure terminal
+
+interface fastethernet 0/1
+switchport mode access
+switchport access vlan 10
+
+interface fastethernet 0/4
+switchport mode access
+switchport access vlan 10
+
+interface fastethernet 0/2
+switchport mode access
+switchport access vlan 11
+
+end

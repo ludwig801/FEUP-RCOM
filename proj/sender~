@@ -1,0 +1,4 @@
+clear;
+printf "Configuring sender... Done.\n";
+sudo chmod o+rw /dev/ttyS4;
+./proj /dev/ttyS4 T link_layer.c 9600 3;

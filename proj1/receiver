@@ -1,0 +1,4 @@
+clear;
+printf "Configuring receiver... Done.\n";
+sudo chmod o+rw /dev/ttyS0;
+./proj /dev/ttyS0 R 9600;

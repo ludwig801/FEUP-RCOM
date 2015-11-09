@@ -1,0 +1,5 @@
+printf "Ports:\n	> /dev/ttyS0 (Receiver)\n	> /dev/ttyS4 (Transmitter) \n";
+
+printf "Virtual serial port opened. \n Press CTRL+C to close. \n";
+sudo socat PTY,link=/dev/ttyS0 PTY,link=/dev/ttyS4; 
+printf "\nClosing virtual serial port... Done.\n"

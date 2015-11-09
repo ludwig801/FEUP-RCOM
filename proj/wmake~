@@ -1,0 +1,7 @@
+ all:
+	clear
+	gcc -o proj main.c application.c link_layer.c alarm.c 
+
+ clean:
+
+	rm -f proj

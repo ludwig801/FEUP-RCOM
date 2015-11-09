@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# configure pc ip address/subnet
+ifconfig eth0 172.16.40.1/24
+
+# > ifconfig
+#
+# ip addr 172.16.40.1
+# mac addr 00:0f:fe:8c:af:af
+
+# > ping 172.16.40.254
+
+# > route -n
+#
+# Destination     Gateway       Genmask         Flags Metric Ref    Use Iface
+# 172.16.40.0     0.0.0.0       255.255.255.0   U     0      0        0 eth0
+
+# > arp -a
+#
+# ? (172.16.40.254) at 00:21:5a:c7:64:8e [ether] on eth0
+
+arp -d 172.16.40.254
+
+# wireshark packet capture
+#
+# > ping 172.16.40.254
+
+

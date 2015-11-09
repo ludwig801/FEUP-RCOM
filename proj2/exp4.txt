@@ -1,0 +1,148 @@
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  Exp 2  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+### commands
+
+ifconfig interface ipToAssign/numberBitsMask
+route add -net targetNetwork/numberBitsMask gw gateWayIp
+route add default gw gateWayIp
+route -n
+arp -a
+
+
+ip route prefix mask {ip-address | interface-type interface-number [ip-address]}
+ip route network/mask gateway
+
+interface type slot/port
+ip address ipaddress subnetmas
+
+
+y -> bancada
+x -> vlan number
+
+
+Enabling echo-reply to broadcast request
+echo 0 > /proc/sys/net/ipv4/icmp_echo_ignore_broadcasts
+
+
+Enabling forwarding in tuxes
+echo 1 > /proc/sys/net/ipv4/ip_forward
+
+
+------ adicionar vlan
+configure terminal
+vlan yx
+end
+show vlan id yx
+
+
+------ adicionar porta a vlan
+configure terminal
+interface fastethernet 0/port
+switchport mode access
+switchport access vlan vlanNumber
+end
+
+show running-config interface fastethernet 0/portNumber
+show interfaces fastethernet 0/portNumber switchport
+
+
+
+================================== tux 1
+ip:		172.16.10.1
+mac:	00:e0:7d:b4:b8:94
+
+>>xterm
+route add default gw 172.16.10.254
+
+ex4.4
+traceroute 172.16.y1.1
+
+
+
+================================== tux 2
+ip:		172.16.11.1
+mac:	00:12:3f:4e:17:a8
+
+>>xterm
+route add default gw 172.16.11.254
+
+ex4
+route del -net 172.16.y0.0/24 gw 0.0.0.0
+
+
+
+================================== tux 3
+ip:		172.16.1.13
+mac:	00:12:3f:45:df:52
+
+
+>>GtkTerm
+
+enable
+8nortel
+
+
+**********  configurar as portas para o router
+configure terminal
+interface fastethernet 0/6
+switchport mode access
+switchport access vlan 11
+end
+
+
+********** router
+root
+8nortel
+
+
+---- setup router interfaces
+
+configure terminal
+interface gigabitethernet 0/0
+ip address 172.16.y1.254 255.255.255.0
+no shutdown
+ip nat inside
+exit
+
+
+interface gigabitethernet 0/1
+ip address 172.16.1.y9 255.255.255.0
+no shutdown
+ip nat outside
+exit
+
+end
+
+show interface gigabitethernet 0/0
+show interface gigabitethernet 0/1
+
+
+configure terminal
+access-list 1 permit 172.16.y0.0 0.0.0.255
+access-list 1 permit 172.16.y1.0 0.0.0.255
+
+ip route 0.0.0.0 0.0.0.0 172.16.1.254
+ip route 172.16.y0.0 255.255.255.0 172.16.y1.253
+end
+
+
+----  NAT
+configure terminal
+ip nat pool ovrld 172.16.1.y9 172.16.1.y9 prefix 24
+ip nat inside source list 1 pool ovrld overload
+
+end
+
+
+
+
+================================== tux 4
+ip eth0:	172.16.10.254
+mac eth0:	00:22:64:a6:a4:f8
+
+ip eth1:	172.16.11.253
+mac eth1:	00:c0:df:04:20:99
+
+
+>>xterm
+route add default gw 172.16.11.254

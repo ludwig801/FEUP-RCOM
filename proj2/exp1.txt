@@ -1,0 +1,44 @@
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  Exp 1  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+### commands
+
+ifconfig interface ipToAssign/numberBitsMask
+route add -net targetNetwork/numberBitsMask gw gateWayIp
+route add default gw gateWayIp
+route -n
+arp -a
+
+y -> bancada
+
+
+
+================================== tux 1, 2, 3 e 4
+>>xterm
+echo 0 > /proc/sys/net/ipv4/icmp_echo_ignore_broadcasts
+
+
+
+================================== tux 1 e 4
+>>xterm
+updateimage
+/etc/init.d/networking restart
+ifconfig eth0 down
+ifconfig eth0 up
+
+
+
+
+================================== tux 1
+ip:		172.16.10.1
+mac:	00:e0:7d:b4:b8:94
+
+>>xterm
+ifconfig eth0 172.16.y0.1/24
+
+
+================================== tux 4
+ip:		172.16.10.254
+mac:	00:22:64:a6:a4:f8
+
+>>xterm
+ifconfig eth0 172.16.y0.254/24
